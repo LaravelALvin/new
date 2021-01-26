@@ -337,10 +337,10 @@ a:hover{
 
     .loading{
         position: fixed;
-        left: 100px;
-        top: 210px;
+        left: 93px;
+        top: 235px;
         width: 50%;
-        height: 5%;
+        height: 4%;
         z-index: 9999;
         background: url("https://lh3.googleusercontent.com/pw/ACtC-3efJKIW4pgegMBXhTReva2vsfTbvHpPp9iznTGZNQ7WJSuCwkR716WTs0F0G5XBcIKrnpOTtUzX1XEEI46O63_i7EOtg6UryF0APE_fGvjJ-af_7tHGJrX_uOgdn4h094_vFwsPH3Cn3hSBHNAxnpEL=s300-no?authuser=0") center no-repeat #fff;
        
@@ -348,8 +348,8 @@ a:hover{
 
  .signuploading{
         position: fixed;
-        left: 90px;
-        top: 50px;
+        left: 85px;
+        top: 10px;
         width: 60%;
         height: 5%;
         z-index: 9999;
