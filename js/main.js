@@ -41,7 +41,7 @@ var Note = {
 				if ($("#txt_username").val() == '') {
 					$(".txt_error").text('Username must not be empty!');
 				}else if($("#txt_password").val() == ''){
-					$(".txt_error").text('Passowrd must not be empty!');
+					$(".txt_error").text('Password must not be empty!');
 				}else{
 					$(".txt_error").text('');
 					var user = {
@@ -49,57 +49,52 @@ var Note = {
 					};
 
 					$.ajax({
-					type : "POST",
-					data : { data: user, action : 'ifUserExist'},
-					url : '../php/Note.php',
-					beforeSend:function(){
-						$(".loading").addClass("active");
-						
-					},
-					success : function(data){
-						$(".loading").removeClass("active");
-						Note.username = jQuery.parseJSON(data);
-						console.log(data);
-						if (!$.trim(Note.username)){
-							
-							$(".txt_error").text('Username does not exist');
+						type : "POST",
+						data : { data: user, action : 'ifUserExist'},
+						url : '../php/Note.php',
+						beforeSend:function(){
+							$(".loading").addClass("active");
 
-						}else{
-							var user = {
-								username : Note.username[0].username,
-								password : $("#txt_password").val()	
-							};
-							console.log(user);
-							$.ajax({
-							type : "POST",
-							data : { data: user, action : 'login'},
-							url : '../php/Note.php',
-							beforeSend:function(){
-								$(".loading").addClass("active");
-								
-							},
-							success : function(data){
-								$(".loading").removeClass("active");
-								var action = jQuery.parseJSON(data);
-								console.log(data);
-								if (action == "verified"){
-									window.location.href = "../index.php";
-								}else{
-									$(".txt_error").text('Incorrect Password');
-								}
+						},
+						success : function(data){
+							$(".loading").removeClass("active");
+							Note.username = jQuery.parseJSON(data);
+							if (!$.trim(Note.username)){
+								$(".txt_error").text('Username does not exist');
+
+							}else{
+								var user = {
+									username : Note.username[0].username,
+									password : $("#txt_password").val()	
+								};
+								console.log(user);
+								$.ajax({
+									type : "POST",
+									data : { data: user, action : 'login'},
+									url : '../php/Note.php',
+									beforeSend:function(){
+										$(".loading").addClass("active");
+									},
+									success : function(data){
+										$(".loading").removeClass("active");
+										var action = jQuery.parseJSON(data);
+										console.log(data);
+										if (action == "verified"){
+											window.location.href = "../index.php";
+										}else{
+											$(".txt_error").text('Incorrect Password');
+										}
+									}
+
+								});
+
 							}
 
-							});
-
 						}
-
-						
-					}
 					});
 
 				}
 
-			
 		},
 
 		/*
@@ -129,10 +124,10 @@ var Note = {
 				$(".txt_error").text('Lastname must not be empty!');
 			}
 			else if($("#txt_password").val() == ''){
-				$(".txt_error").text('Passowrd must not be empty!');
+				$(".txt_error").text('Password must not be empty!');
 			}
 			else if($("#txt_confirmpassword").val() != $("#txt_password").val()){
-				$(".txt_error").text('Passowrd not match!');
+				$(".txt_error").text('Password does not match!');
 			}else{
 				$(".txt_error").text('');
 					var user = {
@@ -152,7 +147,6 @@ var Note = {
 						Note.username = jQuery.parseJSON(data);
 						console.log(data);
 						if (!$.trim(Note.username)){
-							
 							var user = {
 								username : $("#txt_username").val(),
 								firstname : $("#txt_firstname").val(),
@@ -161,29 +155,26 @@ var Note = {
 							};
 
 							$.ajax({
-							type : "POST",
-							data : { data: user, action : 'register'},
-							url : '../php/Note.php',
-							beforeSend:function(){
-								$(".signuploading").addClass("active");
-								
-							},
-							success : function(data){
-								$(".signuploading").removeClass("active");
-								var action = jQuery.parseJSON(data);
-								console.log(data);
-								// if (action == "verified"){
-								// 	window.location.href = "../index.php";
-								// }else{
-								// 	$(".txt_error").text('Incorrect Password');
-								// }
-							}
+								type : "POST",
+								data : { data: user, action : 'register'},
+								url : '../php/Note.php',
+								beforeSend:function(){
+									$(".signuploading").addClass("active");
+								},
+								success : function(data){
+									$(".signuploading").removeClass("active");
+								}
 
 							});
 
 							$(".txt_success").text('Succesfully Registered!');
+							$("#txt_username").val('');
+							$("#txt_firstname").val('');
+							$("#txt_lastname").val('');
+							$("#txt_password").val('');
+							$("#txt_confirmpassword").val('');
 						}else{
-							$(".txt_error").text('Username already not exist');
+							$(".txt_error").text('Username already exist');
 							
 
 						}
